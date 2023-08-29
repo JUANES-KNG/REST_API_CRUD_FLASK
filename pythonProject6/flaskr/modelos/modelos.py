@@ -16,15 +16,15 @@ class Medio(enum.Enum):
     CD = 3
 
 class Album(db.Model):
-    id = db.Column(db.integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
     titulo = db.Column(db.String(128))
     anio = db.Column(db.Integer)
     descripcion = db.Column(db.String(512))
-    medio = db.Column(db.enum(Medio))
+    medio = db.Column(db.Enum(Medio))
     usuario = db.Column(db.Integer, db.ForeignKey("usuario.id"))
     __table_args__=(db.UniqueConstraint('usuario','titulo',name='titulo_unico_album'),)
 
-class Usuario(db.model):
+class Usuario(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     nombre = db.Column(db.String(50))
     contrasena = db.Column(db.String(50))
